@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheat Sheet - CSS</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>🎨 Cheat Sheet</h1>
+    <nav>
+      <a href="index.html">← Accueil</a>
+      <a href="#selecteurs">Sélecteurs</a>
+      <a href="#texte">Texte</a>
+      <a href="#couleurs">Couleurs</a>
+      <a href="#boxmodel">Box Model</a>
+      <a href="#display">Display</a>
+      <a href="#flexbox">Flexbox</a>
+      <a href="#grid">Grid</a>
+      <a href="#position">Position</a>
+      <a href="#responsive">Responsive</a>
+      <a href="#animations">Animations</a>
+      <a href="#variables">Variables</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         SECTION : SELECTEURS
+    ============================================ -->
+    <section id="selecteurs">
+      <h2>🎯 Sélecteurs</h2>
+
+      <div class="card info-card">
+        <p>💡 Les sélecteurs permettent de <strong>cibler</strong> les éléments HTML auxquels on veut appliquer des styles.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Sélecteurs de base</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Élément */
+p { color: red; }
+
+/* Classe */
+.ma-classe { color: blue; }
+
+/* ID */
+#mon-id { color: green; }
+
+/* Universel (tous les éléments) */
+* { box-sizing: border-box; }
+
+/* Tous les h1 ET h2 */
+h1, h2 { font-weight: bold; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Sélecteurs de combinaison</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Descendant (tous les p dans div) */
+div p { color: red; }
+
+/* Enfant direct */
+div > p { color: blue; }
+
+/* Adjacent (juste après) */
+h1 + p { color: green; }
+
+/* Siblings (tous après) */
+h1 ~ p { color: purple; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Pseudo-classes</code>
+        </div>
+        <div class="card-body">
+          <p>Ciblent un élément selon son <strong>état</strong> ou sa <strong>position</strong>.</p>
+          <div class="exemple">
+            <pre><code>/* Survol souris */
+a:hover { color: red; }
+
+/* Lien visité */
+a:visited { color: purple; }
+
+/* Lien actif (au clic) */
+a:active { color: orange; }
+
+/* Focus (tab ou clic) */
+input:focus { border: 2px solid blue; }
+
+/* Premier enfant */
+li:first-child { font-weight: bold; }
+
+/* Dernier enfant */
+li:last-child { border: none; }
+
+/* Nième enfant */
+li:nth-child(2)    { color: red; }
+li:nth-child(odd)  { background: #eee; } /* impairs */
+li:nth-child(even) { background: #fff; } /* pairs */
+li:nth-child(3n)   { color: blue; }      /* tous les 3 */
+
+/* Pas ce sélecteur */
+p:not(.special) { color: gray; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Pseudo-éléments</code>
+        </div>
+        <div class="card-body">
+          <p>Ciblent une <strong>partie</strong> d'un élément.</p>
+          <div class="exemple">
+            <pre><code>/* Avant le contenu */
+p::before {
+  content: "→ ";
+  color: red;
+}
+
+/* Après le contenu */
+p::after {
+  content: " ✓";
+  color: green;
+}
+
+/* Première lettre */
+p::first-letter {
+  font-size: 2em;
+  float: left;
+}
+
+/* Première ligne */
+p::first-line {
+  font-weight: bold;
+}
+
+/* Texte sélectionné */
+::selection {
+  background: yellow;
+  color: black;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Sélecteurs d'attributs</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* A l'attribut href */
+a[href] { color: blue; }
+
+/* Valeur exacte */
+input[type="text"] { border: 1px solid gray; }
+
+/* Commence par */
+a[href^="https"] { color: green; }
+
+/* Finit par */
+a[href$=".pdf"] { color: red; }
+
+/* Contient */
+a[href*="google"] { color: orange; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Spécificité (priorité)</code>
+        </div>
+        <div class="card-body">
+          <p>En cas de conflit, la règle la plus <strong>spécifique</strong> gagne.</p>
+          <div class="attributs">
+            <p><span class="attr">!important</span> → priorité absolue (éviter !)</p>
+            <p><span class="attr">style=""</span> → 1000 points</p>
+            <p><span class="attr">#id</span> → 100 points</p>
+            <p><span class="attr">.classe</span> → 10 points</p>
+            <p><span class="attr">element</span> → 1 point</p>
+          </div>
+          <div class="exemple">
+            <pre><code>/* 1 point */
+p { color: black; }
+
+/* 10 points */
+.rouge { color: red; }
+
+/* 100 points */
+#titre { color: blue; }
+
+/* 110 points → gagne */
+#titre.rouge { color: purple; }
+
+/* Éviter ça ! */
+p { color: pink !important; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : TEXTE
+    ============================================ -->
+    <section id="texte">
+      <h2>✍️ Typographie & Texte</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>font-family</code>
+        </div>
+        <div class="card-body">
+          <p>Définit la <strong>police</strong> de caractères. Toujours mettre une police de secours.</p>
+          <div class="exemple">
+            <pre><code>/* Polices système */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Google Fonts (dans le head HTML) */
+/* &lt;link href="https://fonts.googleapis.com/
+    css2?family=Roboto&display=swap"
+    rel="stylesheet"&gt; */
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Familles génériques */
+font-family: serif;       /* avec empattements */
+font-family: sans-serif;  /* sans empattements */
+font-family: monospace;   /* largeur fixe (code) */
+font-family: cursive;     /* manuscrit */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>font-size</code>
+        </div>
+        <div class="card-body">
+          <p>Taille du texte. Préférer les unités <strong>relatives</strong>.</p>
+          <div class="attributs">
+            <p><span class="attr">px</span> → pixels (fixe)</p>
+            <p><span class="attr">em</span> → relatif au parent</p>
+            <p><span class="attr">rem</span> → relatif à la racine (html)</p>
+            <p><span class="attr">%</span> → relatif au parent</p>
+            <p><span class="attr">vw/vh</span> → relatif au viewport</p>
+          </div>
+          <div class="exemple">
+            <pre><code>html { font-size: 16px; } /* base */
+
+h1 { font-size: 2rem; }    /* 32px */
+h2 { font-size: 1.5rem; }  /* 24px */
+p  { font-size: 1rem; }    /* 16px */
+small { font-size: 0.875rem; } /* 14px */
+
+/* Fluide avec clamp(min, ideal, max) */
+h1 { font-size: clamp(1.5rem, 5vw, 3rem); }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>font-weight</code>
+        </div>
+        <div class="card-body">
+          <p>Épaisseur de la police.</p>
+          <div class="exemple">
+            <pre><code>font-weight: 100;  /* Thin */
+font-weight: 300;  /* Light */
+font-weight: 400;  /* Normal (regular) */
+font-weight: 500;  /* Medium */
+font-weight: 600;  /* Semi-bold */
+font-weight: 700;  /* Bold */
+font-weight: 800;  /* Extra-bold */
+font-weight: 900;  /* Black */
+
+/* Mots-clés */
+font-weight: normal; /* = 400 */
+font-weight: bold;   /* = 700 */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>text-align · line-height · letter-spacing</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Alignement */
+text-align: left;     /* défaut */
+text-align: center;
+text-align: right;
+text-align: justify;
+
+/* Hauteur de ligne */
+line-height: 1.5;    /* sans unité = recommandé */
+line-height: 24px;
+line-height: 150%;
+
+/* Espacement entre lettres */
+letter-spacing: 0.05em;
+letter-spacing: 2px;
+
+/* Espacement entre mots */
+word-spacing: 0.1em;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>text-decoration · text-transform</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Décoration */
+text-decoration: none;           /* enlève soulignement */
+text-decoration: underline;      /* soulignement */
+text-decoration: underline dotted red; /* stylisé */
+text-decoration: line-through;   /* barré */
+text-decoration: overline;       /* au-dessus */
+
+/* Transformation */
+text-transform: uppercase;   /* MAJUSCULES */
+text-transform: lowercase;   /* minuscules */
+text-transform: capitalize;  /* Première Lettre */
+text-transform: none;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>text-overflow · white-space · word-break</code>
+        </div>
+        <div class="card-body">
+          <p>Gestion du <strong>débordement</strong> du texte.</p>
+          <div class="exemple">
+            <pre><code>/* Texte trop long → "..." */
+.tronque {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Garder les espaces et retours */
+white-space: pre;
+white-space: pre-wrap;  /* avec retour à la ligne */
+white-space: nowrap;    /* jamais de retour */
+
+/* Couper les mots trop longs */
+word-break: break-all;
+word-break: break-word;
+overflow-wrap: break-word;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : COULEURS
+    ============================================ -->
+    <section id="couleurs">
+      <h2>🎨 Couleurs & Fonds</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>color · background-color</code>
+        </div>
+        <div class="card-body">
+          <p>Formats de couleurs disponibles :</p>
+          <div class="exemple">
+            <pre><code>/* Nom */
+color: red;
+color: transparent;
+
+/* Hexadécimal */
+color: #ff0000;
+color: #f00;       /* raccourci */
+color: #ff0000aa;  /* avec opacité */
+
+/* RGB */
+color: rgb(255, 0, 0);
+color: rgba(255, 0, 0, 0.5); /* 50% opacité */
+
+/* HSL (teinte, saturation, luminosité) */
+color: hsl(0, 100%, 50%);
+color: hsla(0, 100%, 50%, 0.5);
+
+/* Modern (CSS4) */
+color: rgb(255 0 0 / 50%);
+color: hsl(0 100% 50% / 50%);</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>background</code>
+        </div>
+        <div class="card-body">
+          <p>Propriété raccourcie pour tout le fond.</p>
+          <div class="exemple">
+            <pre><code>/* Couleur */
+background-color: #f0f0f0;
+
+/* Image */
+background-image: url('image.jpg');
+background-size: cover;     /* couvre tout */
+background-size: contain;   /* visible en entier */
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed; /* effet parallax */
+
+/* Raccourci */
+background: url('img.jpg') center/cover no-repeat;
+
+/* Dégradé linéaire */
+background: linear-gradient(to right, #6c63ff, #00d4aa);
+background: linear-gradient(135deg, #667eea, #764ba2);
+
+/* Dégradé radial */
+background: radial-gradient(circle, #6c63ff, #1a1d27);
+
+/* Plusieurs backgrounds */
+background: 
+  url('top.png') top center no-repeat,
+  url('bg.jpg') center/cover no-repeat;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>opacity · filter</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Opacité globale (0 = invisible, 1 = visible) */
+opacity: 0.5;
+
+/* Filtres CSS */
+filter: blur(5px);
+filter: brightness(1.5);   /* 150% luminosité */
+filter: contrast(200%);
+filter: grayscale(100%);   /* noir et blanc */
+filter: sepia(100%);
+filter: saturate(200%);
+filter: invert(100%);
+
+/* Ombre portée */
+filter: drop-shadow(2px 4px 6px black);
+
+/* Combinaison */
+filter: grayscale(50%) blur(2px);</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : BOX MODEL
+    ============================================ -->
+    <section id="boxmodel">
+      <h2>📦 Box Model</h2>
+
+      <div class="card info-card">
+        <p>💡 Chaque élément HTML est une boîte : <strong>content → padding → border → margin</strong></p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>width · height</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>width: 300px;
+width: 50%;
+width: 100vw;      /* 100% du viewport */
+width: auto;       /* défaut */
+width: fit-content;
+width: max-content;
+width: min-content;
+
+/* Min et max */
+min-width: 200px;
+max-width: 1200px;
+min-height: 100px;
+max-height: 500px;
+
+/* Astuce responsive */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto; /* centrer */
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>padding</code>
+        </div>
+        <div class="card-body">
+          <p>Espace <strong>intérieur</strong> entre le contenu et la bordure.</p>
+          <div class="exemple">
+            <pre><code>/* Tous les côtés */
+padding: 20px;
+
+/* Vertical | Horizontal */
+padding: 10px 20px;
+
+/* Haut | Horizontal | Bas */
+padding: 10px 20px 15px;
+
+/* Haut | Droite | Bas | Gauche (sens horaire) */
+padding: 10px 20px 15px 25px;
+
+/* Individuel */
+padding-top: 10px;
+padding-right: 20px;
+padding-bottom: 10px;
+padding-left: 20px;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>margin</code>
+        </div>
+        <div class="card-body">
+          <p>Espace <strong>extérieur</strong> autour de l'élément. Même syntaxe que padding.</p>
+          <div class="exemple">
+            <pre><code>/* Même syntaxe que padding */
+margin: 20px;
+margin: 10px 20px;
+margin: 10px 20px 15px 25px;
+
+/* Centrer horizontalement */
+margin: 0 auto;
+
+/* Valeur négative (possible !) */
+margin-top: -10px;
+
+/* auto = prend l'espace disponible */
+margin-left: auto;  /* pousse à droite */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>border</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Raccourci : épaisseur style couleur */
+border: 1px solid black;
+border: 2px dashed red;
+border: 3px dotted blue;
+
+/* Individuel */
+border-top: 2px solid red;
+border-right: none;
+border-bottom: 1px solid #ccc;
+border-left: 4px solid blue;
+
+/* Détaillé */
+border-width: 2px;
+border-style: solid; /* solid dashed dotted double */
+border-color: red;
+
+/* Arrondi */
+border-radius: 10px;
+border-radius: 50%;           /* cercle */
+border-radius: 10px 20px 10px 20px;
+border-top-left-radius: 10px;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>box-sizing</code>
+        </div>
+        <div class="card-body">
+          <p>Définit comment la <strong>largeur totale</strong> est calculée.</p>
+          <div class="exemple">
+            <pre><code>/* Par défaut : width = content seulement */
+box-sizing: content-box;
+
+/* Recommandé : width inclut padding + border */
+box-sizing: border-box;
+
+/* Appliquer globalement (reset) */
+*, *::before, *::after {
+  box-sizing: border-box;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>box-shadow</code>
+        </div>
+        <div class="card-body">
+          <p>Ombre de la boîte. Syntaxe : <code>x y blur spread couleur</code></p>
+          <div class="exemple">
+            <pre><code>/* Simple */
+box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+
+/* Ombre intérieure */
+box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+
+/* Plusieurs ombres */
+box-shadow: 
+  0 1px 3px rgba(0,0,0,0.1),
+  0 4px 16px rgba(0,0,0,0.2);
+
+/* Glow effect */
+box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+
+/* Ombre neumorphism */
+box-shadow: 
+  8px 8px 16px #d1d1d1,
+  -8px -8px 16px #ffffff;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>overflow</code>
+        </div>
+        <div class="card-body">
+          <p>Gère le contenu qui <strong>dépasse</strong> la boîte.</p>
+          <div class="exemple">
+            <pre><code>overflow: visible;  /* défaut, dépasse */
+overflow: hidden;   /* coupe le contenu */
+overflow: scroll;   /* scrollbar toujours */
+overflow: auto;     /* scrollbar si nécessaire */
+
+/* Séparément */
+overflow-x: hidden;
+overflow-y: auto;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : DISPLAY
+    ============================================ -->
+    <section id="display">
+      <h2>🖥️ Display & Visibility</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>display</code>
+        </div>
+        <div class="card-body">
+          <p>Propriété la plus importante pour la mise en page.</p>
+          <div class="exemple">
+            <pre><code>/* Bloc : prend toute la largeur */
+display: block;
+
+/* Inline : dans le flux du texte */
+display: inline;
+
+/* Les deux à la fois */
+display: inline-block;
+
+/* Masquer l'élément (supprime l'espace) */
+display: none;
+
+/* Flexbox → voir section suivante */
+display: flex;
+display: inline-flex;
+
+/* Grid → voir section suivante */
+display: grid;
+display: inline-grid;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>visibility · opacity vs display:none</code>
+        </div>
+        <div class="card-body">
+          <div class="attributs">
+            <p><span class="attr">display: none</span> → masqué + espace supprimé</p>
+            <p><span class="attr">visibility: hidden</span> → masqué mais espace gardé</p>
+            <p><span class="attr">opacity: 0</span> → invisible mais espace gardé + cliquable</p>
+          </div>
+          <div class="exemple">
+            <pre><code>/* Masqué, ne prend plus de place */
+display: none;
+
+/* Invisible, garde sa place */
+visibility: hidden;
+
+/* Transparent, garde sa place ET ses events */
+opacity: 0;
+
+/* Accessible mais masqué visuellement */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>cursor</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>cursor: default;    /* flèche normale */
+cursor: pointer;    /* main (liens, boutons) */
+cursor: text;       /* curseur texte */
+cursor: move;       /* déplacement */
+cursor: grab;       /* main ouverte */
+cursor: grabbing;   /* main fermée */
+cursor: not-allowed;/* interdit */
+cursor: crosshair;  /* croix */
+cursor: zoom-in;
+cursor: none;       /* curseur invisible */</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : FLEXBOX
+    ============================================ -->
+    <section id="flexbox">
+      <h2>💪 Flexbox</h2>
+
+      <div class="card info-card">
+        <p>💡 Flexbox est parfait pour aligner des éléments sur <strong>un axe</strong> (horizontal ou vertical). On applique les propriétés sur le <strong>parent</strong> (container).</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Propriétés du container (parent)</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>.container {
+  display: flex;
+
+  /* Direction de l'axe principal */
+  flex-direction: row;          /* → défaut */
+  flex-direction: row-reverse;  /* ← */
+  flex-direction: column;       /* ↓ */
+  flex-direction: column-reverse; /* ↑ */
+
+  /* Retour à la ligne */
+  flex-wrap: nowrap;    /* défaut */
+  flex-wrap: wrap;      /* retour à la ligne */
+  flex-wrap: wrap-reverse;
+
+  /* Raccourci direction + wrap */
+  flex-flow: row wrap;
+
+  /* Alignement axe principal (horizontal par défaut) */
+  justify-content: flex-start;    /* défaut */
+  justify-content: flex-end;
+  justify-content: center;
+  justify-content: space-between; /* espacés, collés aux bords */
+  justify-content: space-around;  /* espacés, demi-espace bords */
+  justify-content: space-evenly;  /* espacés égaux partout */
+
+  /* Alignement axe secondaire (vertical par défaut) */
+  align-items: stretch;    /* défaut, même hauteur */
+  align-items: flex-start; /* haut */
+  align-items: flex-end;   /* bas */
+  align-items: center;     /* centré */
+  align-items: baseline;   /* ligne de base du texte */
+
+  /* Alignement lignes (si wrap) */
+  align-content: flex-start;
+  align-content: center;
+  align-content: space-between;
+
+  /* Espacement entre les éléments */
+  gap: 20px;
+  gap: 10px 20px; /* row-gap column-gap */
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Propriétés des éléments (enfants)</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>.item {
+  /* Ordre d'affichage (défaut: 0) */
+  order: 2;
+
+  /* Capacité à grandir (prendre l'espace dispo) */
+  flex-grow: 1;   /* prend tout l'espace dispo */
+  flex-grow: 0;   /* défaut, ne grandit pas */
+
+  /* Capacité à rétrécir */
+  flex-shrink: 1; /* défaut, peut rétrécir */
+  flex-shrink: 0; /* ne rétrécit pas */
+
+  /* Taille de base */
+  flex-basis: auto; /* défaut */
+  flex-basis: 200px;
+
+  /* Raccourci grow | shrink | basis */
+  flex: 1;          /* = 1 1 0 */
+  flex: 1 1 auto;
+  flex: 0 0 200px;  /* fixe à 200px */
+
+  /* Surcharge align-items pour cet élément */
+  align-self: center;
+  align-self: flex-start;
+  align-self: flex-end;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Patterns Flexbox courants</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Centrage parfait */
+.centré {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Cards égales */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.card {
+  flex: 1 1 250px; /* min 250px, grandit */
+}
+
+/* Footer collé en bas */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main { flex: 1; }
+footer { margin-top: auto; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : GRID
+    ============================================ -->
+    <section id="grid">
+      <h2>🗂️ CSS Grid</h2>
+
+      <div class="card info-card">
+        <p>💡 Grid est parfait pour les mises en page en <strong>2 dimensions</strong> (lignes ET colonnes). Idéal pour les layouts de page complète.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Propriétés du container (parent)</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>.container {
+  display: grid;
+
+  /* Définir les colonnes */
+  grid-template-columns: 200px 200px 200px;
+  grid-template-columns: 1fr 1fr 1fr;      /* fractions égales */
+  grid-template-columns: 2fr 1fr;           /* 2/3 - 1/3 */
+  grid-template-columns: 200px 1fr;         /* fixe + flexible */
+  grid-template-columns: repeat(3, 1fr);    /* 3 colonnes égales */
+
+  /* Colonnes responsives automatiques */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+  /* Définir les lignes */
+  grid-template-rows: 100px auto 100px;
+  grid-template-rows: repeat(3, 1fr);
+
+  /* Espacement */
+  gap: 20px;
+  column-gap: 20px;
+  row-gap: 10px;
+
+  /* Alignement de tous les items */
+  justify-items: start | end | center | stretch;
+  align-items: start | end | center | stretch;
+
+  /* Alignement de la grille entière */
+  justify-content: start | end | center | space-between;
+  align-content: start | end | center | space-between;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Propriétés des éléments (enfants)</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>.item {
+  /* Placer sur les colonnes */
+  grid-column: 1 / 3;      /* de la ligne 1 à 3 */
+  grid-column: 1 / -1;     /* toute la largeur */
+  grid-column: span 2;     /* prend 2 colonnes */
+
+  /* Placer sur les lignes */
+  grid-row: 1 / 3;
+  grid-row: span 2;
+
+  /* Raccourci : row-start / col-start / row-end / col-end */
+  grid-area: 1 / 1 / 3 / 3;
+
+  /* Alignement individuel */
+  justify-self: center;
+  align-self: center;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>grid-template-areas</code>
+        </div>
+        <div class="card-body">
+          <p>Nommer les zones de la grille, très <strong>lisible</strong> !</p>
+          <div class="exemple">
+            <pre><code>.page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header  header"
+    "sidebar main"
+    "footer  footer";
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+header  { grid-area: header; }
+.sidebar{ grid-area: sidebar; }
+main    { grid-area: main; }
+footer  { grid-area: footer; }</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Patterns Grid courants</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Grille de cards responsive */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Layout Holy Grail */
+.page {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+/* Galerie photo */
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: 10px;
+}
+.galerie .grande {
+  grid-column: span 2;
+  grid-row: span 2;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : POSITION
+    ============================================ -->
+    <section id="position">
+      <h2>📌 Position</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>position</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Défaut : dans le flux normal */
+position: static;
+
+/* Décalé par rapport à sa position normale
+   RESTE dans le flux */
+position: relative;
+top: 10px;
+left: 20px;
+
+/* Sorti du flux, positionné par rapport
+   au parent "relative" le plus proche */
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+
+/* Fixé par rapport au viewport
+   Reste visible en scrollant */
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+
+/* Comme relative, devient fixed
+   quand il atteint le bord */
+position: sticky;
+top: 0; /* colle en haut au scroll */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>z-index</code>
+        </div>
+        <div class="card-body">
+          <p>Gère la <strong>profondeur</strong> (superposition). Fonctionne uniquement sur les éléments positionnés.</p>
+          <div class="exemple">
+            <pre><code>/* Plus le nombre est grand, plus c'est devant */
+.derriere { 
+  position: relative;
+  z-index: 1; 
+}
+.devant { 
+  position: relative;
+  z-index: 10; 
+}
+.modal { 
+  position: fixed;
+  z-index: 1000; 
+}
+
+/* Conventions classiques */
+/* 1-9    : éléments normaux */
+/* 10-99  : dropdowns */
+/* 100-999: modals */
+/* 1000+  : tooltips, notifications */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Centrer avec position absolute</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Parent */
+.parent {
+  position: relative;
+}
+
+/* Enfant centré */
+.enfant {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Couvrir tout le parent */
+.overlay {
+  position: absolute;
+  inset: 0; /* = top:0 right:0 bottom:0 left:0 */
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : RESPONSIVE
+    ============================================ -->
+    <section id="responsive">
+      <h2>📱 Responsive Design</h2>
+
+      <div class="card info-card">
+        <p>💡 <strong>Mobile-first</strong> = écrire d'abord le CSS pour mobile, puis ajouter des media queries pour les grands écrans avec <code>min-width</code>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>@media queries</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Mobile first (défaut = mobile) */
+
+/* Tablette (≥ 768px) */
+@media (min-width: 768px) {
+  .container { padding: 2rem; }
+}
+
+/* Desktop (≥ 1024px) */
+@media (min-width: 1024px) {
+  .container { max-width: 1200px; }
+}
+
+/* Grand écran (≥ 1440px) */
+@media (min-width: 1440px) { }
+
+/* Desktop-first (défaut = desktop) */
+@media (max-width: 1023px) { }
+@media (max-width: 767px)  { }
+
+/* Plage de tailles */
+@media (min-width: 768px) and (max-width: 1023px) { }
+
+/* Orientation */
+@media (orientation: portrait)  { }
+@media (orientation: landscape) { }
+
+/* Préférence dark mode */
+@media (prefers-color-scheme: dark)  { }
+@media (prefers-color-scheme: light) { }
+
+/* Préférence animations réduites */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Unités relatives utiles</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Viewport */
+width: 100vw;    /* 100% largeur viewport */
+height: 100vh;   /* 100% hauteur viewport */
+height: 100dvh;  /* dynamic viewport height (mobile) */
+font-size: 5vw;  /* relatif à la largeur viewport */
+
+/* Relatif au parent */
+width: 50%;
+font-size: 1.2em; /* x1.2 la taille du parent */
+
+/* Relatif à la racine (html) */
+font-size: 1.5rem; /* 1.5x la taille de html */
+margin: 2rem;
+
+/* Fonctions CSS */
+width: min(100%, 1200px);     /* le plus petit */
+width: max(300px, 50%);       /* le plus grand */
+font-size: clamp(1rem, 3vw, 2rem); /* entre min et max */</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Breakpoints standards</code>
+        </div>
+        <div class="card-body">
+          <div class="attributs">
+            <p><span class="attr">< 576px</span> → Mobile portrait</p>
+            <p><span class="attr">576px</span> → Mobile paysage</p>
+            <p><span class="attr">768px</span> → Tablette</p>
+            <p><span class="attr">1024px</span> → Desktop</p>
+            <p><span class="attr">1280px</span> → Large Desktop</p>
+            <p><span class="attr">1536px</span> → XL Desktop</p>
+          </div>
+          <div class="exemple">
+            <pre><code>/* Variables de breakpoints */
+:root {
+  --sm: 576px;
+  --md: 768px;
+  --lg: 1024px;
+  --xl: 1280px;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Images responsives</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Image qui s'adapte */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Image de fond responsive */
+.hero {
+  background-image: url('small.jpg');
+}
+@media (min-width: 768px) {
+  .hero {
+    background-image: url('large.jpg');
+  }
+}
+
+/* object-fit (comme background-size) */
+img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;    /* couvre, recadre */
+  object-fit: contain;  /* tout visible */
+  object-position: center top;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : ANIMATIONS
+    ============================================ -->
+    <section id="animations">
+      <h2>✨ Transitions & Animations</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>transition</code>
+        </div>
+        <div class="card-body">
+          <p>Anime le changement d'une propriété CSS. S'applique sur l'<strong>état de base</strong>.</p>
+          <div class="exemple">
+            <pre><code>/* propriété durée timing délai */
+transition: color 0.3s ease;
+transition: all 0.3s ease;
+transition: background 0.3s, transform 0.2s;
+
+/* Timing functions */
+transition-timing-function: ease;        /* défaut */
+transition-timing-function: linear;      /* vitesse constante */
+transition-timing-function: ease-in;     /* démarre lentement */
+transition-timing-function: ease-out;    /* finit lentement */
+transition-timing-function: ease-in-out; /* lent au début et fin */
+transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+/* Exemple bouton */
+.btn {
+  background: blue;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.btn:hover {
+  background: darkblue;
+  transform: translateY(-2px);
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>transform</code>
+        </div>
+        <div class="card-body">
+          <p>Transformations géométriques. <strong>N'affecte pas</strong> le flux de la page.</p>
+          <div class="exemple">
+            <pre><code>/* Déplacement */
+transform: translateX(50px);
+transform: translateY(-20px);
+transform: translate(50px, -20px);
+
+/* Mise à l'échelle */
+transform: scale(1.5);       /* 150% */
+transform: scaleX(2);
+transform: scale(0.8, 1.2);
+
+/* Rotation */
+transform: rotate(45deg);
+transform: rotateX(45deg);   /* 3D */
+transform: rotateY(180deg);
+
+/* Inclinaison */
+transform: skewX(20deg);
+transform: skew(20deg, 10deg);
+
+/* Combinaison */
+transform: translate(-50%, -50%) rotate(45deg) scale(1.2);
+
+/* Origine de transformation */
+transform-origin: center;    /* défaut */
+transform-origin: top left;
+transform-origin: 0% 100%;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>@keyframes · animation</code>
+        </div>
+        <div class="card-body">
+          <p>Animations complexes avec étapes.</p>
+          <div class="exemple">
+            <pre><code>/* Définir l'animation */
+@keyframes fondu {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes glisse {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0);     opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+/* Appliquer l'animation */
+.element {
+  animation-name: fondu;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-delay: 0.2s;
+  animation-iteration-count: 1;       /* ou infinite */
+  animation-direction: normal;         /* ou reverse, alternate */
+  animation-fill-mode: forwards;       /* garde le dernier état */
+  animation-play-state: running;       /* ou paused */
+
+  /* Raccourci : nom durée timing délai itération direction fill */
+  animation: fondu 0.5s ease 0.2s 1 normal forwards;
+  animation: pulse 1s ease-in-out infinite;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : VARIABLES CSS
+    ============================================ -->
+    <section id="variables">
+      <h2>🔧 Variables CSS & Autres</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Variables CSS (Custom Properties)</code>
+        </div>
+        <div class="card-body">
+          <p>Stocker des valeurs réutilisables. Modifiables en JavaScript !</p>
+          <div class="exemple">
+            <pre><code>/* Déclaration (généralement dans :root) */
+:root {
+  --couleur-primaire: #6c63ff;
+  --couleur-secondaire: #00d4aa;
+  --couleur-bg: #0f1117;
+  --font-size-base: 16px;
+  --border-radius: 10px;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 2rem;
+  --shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Utilisation */
+.btn {
+  background: var(--couleur-primaire);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm) var(--spacing-md);
+  box-shadow: var(--shadow);
+}
+
+/* Valeur de fallback */
+color: var(--couleur-texte, black);
+
+/* Modifier pour un composant */
+.dark-section {
+  --couleur-bg: #000;
+}
+
+/* Modifier via JavaScript */
+document.documentElement.style
+  .setProperty('--couleur-primaire', '#ff0000');</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>calc()</code>
+        </div>
+        <div class="card-body">
+          <p>Calculs CSS avec <strong>unités mixtes</strong>.</p>
+          <div class="exemple">
+            <pre><code>/* Mélanger px et % */
+width: calc(100% - 40px);
+width: calc(100% - 2rem);
+
+/* Avec variables */
+width: calc(var(--sidebar-width) + 20px);
+
+/* Grille manuelle */
+.item {
+  width: calc((100% - 2 * 20px) / 3);
+}
+
+/* Font fluide sans clamp */
+font-size: calc(1rem + 1vw);</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>Utilitaires courants</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Reset basique */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Liens sans style */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Listes sans style */
+ul, ol {
+  list-style: none;
+}
+
+/* Image responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Texte sélectionnable */
+::selection {
+  background: var(--couleur-primaire);
+  color: white;
+}
+
+/* Scroll doux */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Container centré */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Centrage flex rapide */
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Texte tronqué */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Aspect ratio */
+.video-wrapper {
+  aspect-ratio: 16 / 9;
+}
+.avatar {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>@import · :root · Cascade</code>
+        </div>
+        <div class="card-body">
+          <div class="exemple">
+            <pre><code>/* Importer un autre CSS */
+@import url('reset.css');
+@import url('https://fonts.googleapis.com/...');
+
+/* Cibler l'élément racine (html) */
+:root {
+  font-size: 16px;
+}
+
+/* Héritage */
+.parent { color: red; }
+.enfant { /* hérite color: red */ }
+.enfant2 { color: inherit; } /* force l'héritage */
+.enfant3 { color: initial; } /* valeur par défaut navigateur */
+.enfant4 { color: unset;   } /* inherit si héritable, sinon initial */
+
+/* Cascade : ordre de priorité
+   1. !important
+   2. Style inline
+   3. ID
+   4. Classe / pseudo-classe / attribut
+   5. Élément / pseudo-élément
+   6. Ordre d'apparition dans le CSS */</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>📚 Cheat Sheet CSS — Classe Dev</p>
+    <p>
+      <a href="index.html">HTML</a> · 
+      <a href="css.html">CSS</a>
+    </p>
+  </footer>
+
+</body>
+</html>

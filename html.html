@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheat Sheet - HTML</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>📄 Cheat Sheet</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#structure">Structure</a>
+      <a href="#texte">Texte</a>
+      <a href="#liens">Liens</a>
+      <a href="#listes">Listes</a>
+      <a href="#tableaux">Tableaux</a>
+      <a href="#formulaires">Formulaires</a>
+      <a href="#medias">Médias</a>
+      <a href="#semantique">Sémantique</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- ============================================
+         SECTION : STRUCTURE DE BASE
+    ============================================ -->
+    <section id="structure">
+      <h2>🏗️ Structure de base</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;!DOCTYPE html&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Déclare le type de document. Doit être la <strong>toute première ligne</strong> du fichier HTML.</p>
+          <div class="exemple">
+            <span class="label">Exemple :</span>
+            <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;html&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Élément <strong>racine</strong> de la page. Tout le contenu est à l'intérieur.</p>
+          <div class="attributs">
+            <span class="label">Attribut utile :</span>
+            <span class="attr">lang="fr"</span> → définit la langue de la page
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;html lang="fr"&gt;
+  ...
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;head&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Contient les <strong>métadonnées</strong> (non visibles sur la page) : titre, encodage, liens CSS...</p>
+          <div class="exemple">
+            <pre><code>&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;Ma page&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;body&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Contient tout le contenu <strong>visible</strong> de la page.</p>
+          <div class="exemple">
+            <pre><code>&lt;body&gt;
+  &lt;h1&gt;Bonjour !&lt;/h1&gt;
+&lt;/body&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;meta&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Balise <strong>auto-fermante</strong> pour les métadonnées. Plusieurs usages :</p>
+          <div class="exemple">
+            <pre><code>&lt;!-- Encodage --&gt;
+&lt;meta charset="UTF-8"&gt;
+
+&lt;!-- Responsive --&gt;
+&lt;meta name="viewport" 
+      content="width=device-width, 
+               initial-scale=1.0"&gt;
+
+&lt;!-- Description SEO --&gt;
+&lt;meta name="description" 
+      content="Mon super site"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;title&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Définit le <strong>titre de l'onglet</strong> dans le navigateur. Important pour le SEO.</p>
+          <div class="exemple">
+            <pre><code>&lt;title&gt;Mon Site Web&lt;/title&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;link&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Lie un fichier externe à la page (CSS, favicon...).</p>
+          <div class="exemple">
+            <pre><code>&lt;!-- Lier un CSS --&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;
+
+&lt;!-- Favicon --&gt;
+&lt;link rel="icon" href="favicon.ico"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;script&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Intègre du <strong>JavaScript</strong>. Se place de préférence avant <code>&lt;/body&gt;</code>.</p>
+          <div class="exemple">
+            <pre><code>&lt;!-- JS externe --&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;
+
+&lt;!-- JS inline --&gt;
+&lt;script&gt;
+  console.log("Hello !")
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : TEXTE
+    ============================================ -->
+    <section id="texte">
+      <h2>✍️ Texte & Titres</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;h1&gt; → &lt;h6&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Les <strong>titres</strong>, du plus important (h1) au moins important (h6). Un seul <code>h1</code> par page !</p>
+          <div class="exemple">
+            <pre><code>&lt;h1&gt;Titre principal&lt;/h1&gt;
+&lt;h2&gt;Sous-titre&lt;/h2&gt;
+&lt;h3&gt;Section&lt;/h3&gt;
+&lt;h4&gt;Sous-section&lt;/h4&gt;
+&lt;h5&gt;...&lt;/h5&gt;
+&lt;h6&gt;Plus petit titre&lt;/h6&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;p&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Définit un <strong>paragraphe</strong>. Crée un espace avant et après automatiquement.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;strong&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Texte <strong>important</strong> (affiché en gras). A une valeur sémantique.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;C'est &lt;strong&gt;important&lt;/strong&gt; !&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;em&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Texte avec <em>emphase</em> (affiché en italique). A une valeur sémantique.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;C'est &lt;em&gt;vraiment&lt;/em&gt; cool.&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;span&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Conteneur <strong>inline</strong> générique. Utile pour styler une partie de texte avec CSS.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;Texte &lt;span class="rouge"&gt;coloré&lt;/span&gt;&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;br&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Saut de ligne. Balise <strong>auto-fermante</strong>. À utiliser avec modération.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;Ligne 1&lt;br&gt;Ligne 2&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;hr&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Ligne horizontale de <strong>séparation</strong>. Balise auto-fermante.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;Section 1&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Section 2&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;blockquote&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Citation longue en <strong>bloc</strong>. Souvent indenté par défaut.</p>
+          <div class="exemple">
+            <pre><code>&lt;blockquote cite="source.com"&gt;
+  "La connaissance s'acquiert par l'expérience."
+&lt;/blockquote&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;code&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Affiche du <strong>code informatique</strong> inline avec une police monospace.</p>
+          <div class="exemple">
+            <pre><code>&lt;p&gt;Utilise &lt;code&gt;console.log()&lt;/code&gt;&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;pre&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Texte <strong>préformaté</strong> : conserve les espaces et retours à la ligne.</p>
+          <div class="exemple">
+            <pre><code>&lt;pre&gt;
+  function hello() {
+    console.log("Hello !")
+  }
+&lt;/pre&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : LIENS
+    ============================================ -->
+    <section id="liens">
+      <h2>🔗 Liens</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;a&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Crée un <strong>lien hypertexte</strong>. L'attribut <code>href</code> est obligatoire.</p>
+          <div class="attributs">
+            <p><span class="attr">href</span> → URL de destination</p>
+            <p><span class="attr">target="_blank"</span> → ouvre dans un nouvel onglet</p>
+            <p><span class="attr">rel="noopener"</span> → sécurité avec _blank</p>
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;!-- Lien externe --&gt;
+&lt;a href="https://google.com" 
+   target="_blank" 
+   rel="noopener"&gt;Google&lt;/a&gt;
+
+&lt;!-- Lien interne --&gt;
+&lt;a href="page2.html"&gt;Page 2&lt;/a&gt;
+
+&lt;!-- Ancre (même page) --&gt;
+&lt;a href="#section1"&gt;Aller à section 1&lt;/a&gt;
+
+&lt;!-- Email --&gt;
+&lt;a href="mailto:test@mail.com"&gt;Email&lt;/a&gt;
+
+&lt;!-- Téléphone --&gt;
+&lt;a href="tel:+33600000000"&gt;Appeler&lt;/a&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : LISTES
+    ============================================ -->
+    <section id="listes">
+      <h2>📋 Listes</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;ul&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Liste <strong>non ordonnée</strong> (puces). Contient des <code>&lt;li&gt;</code>.</p>
+          <div class="exemple">
+            <pre><code>&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;ol&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Liste <strong>ordonnée</strong> (numérotée). Contient des <code>&lt;li&gt;</code>.</p>
+          <div class="attributs">
+            <p><span class="attr">start="5"</span> → commence à 5</p>
+            <p><span class="attr">reversed</span> → compte à rebours</p>
+            <p><span class="attr">type="A"</span> → A, B, C... (ou I, i, 1)</p>
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;ol&gt;
+  &lt;li&gt;Étape 1&lt;/li&gt;
+  &lt;li&gt;Étape 2&lt;/li&gt;
+  &lt;li&gt;Étape 3&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;li&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Élément d'une liste (<strong>list item</strong>). Toujours enfant de <code>ul</code> ou <code>ol</code>.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Liste de <strong>définitions</strong> : <code>dl</code> = liste, <code>dt</code> = terme, <code>dd</code> = définition.</p>
+          <div class="exemple">
+            <pre><code>&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Langage de structure&lt;/dd&gt;
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Langage de style&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : TABLEAUX
+    ============================================ -->
+    <section id="tableaux">
+      <h2>📊 Tableaux</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;table&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Conteneur principal du <strong>tableau</strong>.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;thead&gt; &lt;tbody&gt; &lt;tfoot&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Sections du tableau : <strong>en-tête</strong>, <strong>corps</strong>, <strong>pied</strong>. Améliorent la lisibilité et l'accessibilité.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;tr&gt; &lt;th&gt; &lt;td&gt;</code>
+        </div>
+        <div class="card-body">
+          <p><code>tr</code> = ligne | <code>th</code> = cellule d'en-tête (gras) | <code>td</code> = cellule normale</p>
+          <div class="attributs">
+            <p><span class="attr">colspan="2"</span> → fusionne 2 colonnes</p>
+            <p><span class="attr">rowspan="2"</span> → fusionne 2 lignes</p>
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Nom&lt;/th&gt;
+      &lt;th&gt;Âge&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alice&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;caption&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Titre/légende du tableau. Se place juste après <code>&lt;table&gt;</code>.</p>
+          <div class="exemple">
+            <pre><code>&lt;table&gt;
+  &lt;caption&gt;Liste des élèves&lt;/caption&gt;
+  ...
+&lt;/table&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : FORMULAIRES
+    ============================================ -->
+    <section id="formulaires">
+      <h2>📝 Formulaires</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;form&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Conteneur du formulaire.</p>
+          <div class="attributs">
+            <p><span class="attr">action="url"</span> → où envoyer les données</p>
+            <p><span class="attr">method="GET/POST"</span> → méthode d'envoi</p>
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;form action="/submit" method="POST"&gt;
+  ...
+&lt;/form&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;input&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Champ de saisie. Balise <strong>auto-fermante</strong>. Son comportement change avec <code>type</code>.</p>
+          <div class="exemple">
+            <pre><code>&lt;!-- Texte --&gt;
+&lt;input type="text" placeholder="Nom"&gt;
+
+&lt;!-- Email --&gt;
+&lt;input type="email" required&gt;
+
+&lt;!-- Mot de passe --&gt;
+&lt;input type="password"&gt;
+
+&lt;!-- Nombre --&gt;
+&lt;input type="number" min="0" max="100"&gt;
+
+&lt;!-- Date --&gt;
+&lt;input type="date"&gt;
+
+&lt;!-- Checkbox --&gt;
+&lt;input type="checkbox" checked&gt;
+
+&lt;!-- Radio --&gt;
+&lt;input type="radio" name="choix" value="oui"&gt;
+
+&lt;!-- Fichier --&gt;
+&lt;input type="file"&gt;
+
+&lt;!-- Bouton submit --&gt;
+&lt;input type="submit" value="Envoyer"&gt;
+
+&lt;!-- Champ caché --&gt;
+&lt;input type="hidden" value="valeur"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;label&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Étiquette d'un champ. Le <code>for</code> doit correspondre à l'<code>id</code> de l'input.</p>
+          <div class="exemple">
+            <pre><code>&lt;label for="prenom"&gt;Prénom :&lt;/label&gt;
+&lt;input type="text" id="prenom" name="prenom"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;textarea&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Zone de texte <strong>multi-lignes</strong>.</p>
+          <div class="exemple">
+            <pre><code>&lt;textarea rows="5" cols="30" 
+  placeholder="Votre message..."&gt;
+&lt;/textarea&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;select&gt; &lt;option&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Menu <strong>déroulant</strong>.</p>
+          <div class="exemple">
+            <pre><code>&lt;select name="pays"&gt;
+  &lt;option value=""&gt;Choisir...&lt;/option&gt;
+  &lt;option value="fr"&gt;France&lt;/option&gt;
+  &lt;option value="be" selected&gt;Belgique&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;button&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Bouton cliquable. Plus flexible que <code>&lt;input type="submit"&gt;</code>.</p>
+          <div class="attributs">
+            <p><span class="attr">type="submit"</span> → soumet le form</p>
+            <p><span class="attr">type="reset"</span> → réinitialise le form</p>
+            <p><span class="attr">type="button"</span> → bouton simple (JS)</p>
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;button type="submit"&gt;✅ Envoyer&lt;/button&gt;
+&lt;button type="reset"&gt;🔄 Réinitialiser&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;fieldset&gt; &lt;legend&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Groupe des champs liés avec un encadré et un <strong>titre de groupe</strong>.</p>
+          <div class="exemple">
+            <pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;Informations personnelles&lt;/legend&gt;
+  &lt;input type="text" placeholder="Nom"&gt;
+  &lt;input type="email" placeholder="Email"&gt;
+&lt;/fieldset&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : MEDIAS
+    ============================================ -->
+    <section id="medias">
+      <h2>🖼️ Médias</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;img&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Affiche une <strong>image</strong>. Balise auto-fermante. <code>alt</code> est <strong>obligatoire</strong> pour l'accessibilité.</p>
+          <div class="attributs">
+            <p><span class="attr">src</span> → chemin de l'image</p>
+            <p><span class="attr">alt</span> → description (accessibilité + SEO)</p>
+            <p><span class="attr">width / height</span> → dimensions</p>
+            <p><span class="attr">loading="lazy"</span> → chargement différé</p>
+          </div>
+          <div class="exemple">
+            <pre><code>&lt;img src="photo.jpg" 
+     alt="Description de la photo"
+     width="300"
+     loading="lazy"&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;video&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Intègre une <strong>vidéo</strong>.</p>
+          <div class="exemple">
+            <pre><code>&lt;video width="320" controls&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  Votre navigateur ne supporte pas la vidéo.
+&lt;/video&gt;</code></pre>
+          </div>
+          <div class="attributs">
+            <p><span class="attr">controls</span> → affiche les contrôles</p>
+            <p><span class="attr">autoplay</span> → démarre auto</p>
+            <p><span class="attr">muted</span> → muet</p>
+            <p><span class="attr">loop</span> → boucle</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;audio&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Intègre un fichier <strong>audio</strong>.</p>
+          <div class="exemple">
+            <pre><code>&lt;audio controls&gt;
+  &lt;source src="musique.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;iframe&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Intègre une <strong>page externe</strong> (YouTube, Google Maps...).</p>
+          <div class="exemple">
+            <pre><code>&lt;iframe 
+  src="https://www.youtube.com/embed/xxxxx"
+  width="560" 
+  height="315"
+  allowfullscreen&gt;
+&lt;/iframe&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;figure&gt; &lt;figcaption&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Groupe une image avec sa <strong>légende</strong>. Sémantiquement correct.</p>
+          <div class="exemple">
+            <pre><code>&lt;figure&gt;
+  &lt;img src="photo.jpg" alt="Coucher de soleil"&gt;
+  &lt;figcaption&gt;Coucher de soleil à Nice&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================
+         SECTION : SEMANTIQUE
+    ============================================ -->
+    <section id="semantique">
+      <h2>🧱 Balises Sémantiques</h2>
+
+      <div class="card info-card">
+        <p>💡 Les balises sémantiques donnent du <strong>sens</strong> au contenu. Elles sont importantes pour le <strong>SEO</strong> et l'<strong>accessibilité</strong>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;header&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>En-tête de la page ou d'une section. Contient souvent le logo, la nav...</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;nav&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Bloc de <strong>navigation</strong> principal (menu, liens de navigation).</p>
+          <div class="exemple">
+            <pre><code>&lt;nav&gt;
+  &lt;a href="/"&gt;Accueil&lt;/a&gt;
+  &lt;a href="/about"&gt;À propos&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;main&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Contenu <strong>principal</strong> de la page. Un seul par page.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;section&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Section thématique d'une page. Doit avoir un titre (<code>h2</code>, <code>h3</code>...).</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;article&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Contenu <strong>autonome</strong> et réutilisable (article de blog, carte produit...).</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;aside&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Contenu <strong>secondaire</strong> lié au contenu principal (sidebar, pub, liens...).</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;footer&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Pied de page. Contient souvent les mentions légales, liens, contact...</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;div&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Conteneur <strong>bloc</strong> générique, sans valeur sémantique. À utiliser quand aucune balise sémantique n'est appropriée.</p>
+          <div class="exemple">
+            <pre><code>&lt;div class="container"&gt;
+  &lt;p&gt;Contenu...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <code>&lt;details&gt; &lt;summary&gt;</code>
+        </div>
+        <div class="card-body">
+          <p>Crée un <strong>accordéon natif</strong> sans JavaScript.</p>
+          <div class="exemple">
+            <pre><code>&lt;details&gt;
+  &lt;summary&gt;Cliquez pour voir plus&lt;/summary&gt;
+  &lt;p&gt;Contenu caché révélé au clic !&lt;/p&gt;
+&lt;/details&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>📚 Cheat Sheet HTML — Classe Dev</p>
+    <p>
+      <a href="index.html">HTML</a> · 
+      <a href="css.html">CSS</a>
+    </p>
+  </footer>
+
+</body>
+</html>
