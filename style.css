@@ -1,0 +1,328 @@
+/* ==========================================
+   RESET & BASE
+========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary:     #6c63ff;
+  --primary-dark:#4c46b6;
+  --bg:          #0f1117;
+  --bg-card:     #1a1d27;
+  --bg-code:     #12141e;
+  --text:        #e2e8f0;
+  --text-muted:  #8892a4;
+  --border:      #2d3148;
+  --accent:      #00d4aa;
+  --warning:     #f59e0b;
+  --radius:      10px;
+  --shadow:      0 4px 20px rgba(0,0,0,0.3);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  padding: 1.5rem 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow);
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* NAV scroll horizontal */
+header nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox */
+}
+
+header nav::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+header nav a {
+  text-decoration: none;
+  color: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.15);
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+header nav a:hover {
+  background: rgba(255,255,255,0.3);
+  color: white;
+}
+
+/* ==========================================
+   MAIN & SECTIONS
+========================================== */
+main {
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 2.5rem;
+}
+
+section h2 {
+  font-size: 1.3rem;
+  color: var(--accent);
+  padding: 0.8rem 0;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--border);
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.card-header {
+  background: rgba(108, 99, 255, 0.15);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+}
+
+.card-header code {
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-body p {
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.card-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Info card spéciale */
+.info-card {
+  border-color: var(--accent);
+  background: rgba(0, 212, 170, 0.08);
+}
+
+.info-card p {
+  color: var(--text) !important;
+  margin: 0 !important;
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ==========================================
+   ATTRIBUTS
+========================================== */
+.attributs {
+  background: rgba(0,0,0,0.2);
+  border-left: 3px solid var(--warning);
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.88rem;
+}
+
+.attributs p {
+  margin-bottom: 0.3rem !important;
+  color: var(--text-muted) !important;
+}
+
+.attributs p:last-child {
+  margin-bottom: 0 !important;
+}
+
+.attr {
+  display: inline-block;
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warning);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  margin-right: 0.3rem;
+}
+
+/* ==========================================
+   EXEMPLES DE CODE
+========================================== */
+.exemple {
+  margin-top: 0.5rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  font-size: 0.83rem;
+  line-height: 1.6;
+  scrollbar-width: thin;
+}
+
+pre code {
+  color: #a8d8ea;
+  font-family: 'Courier New', monospace;
+}
+
+/* Couleurs syntaxiques basiques */
+pre code {
+  color: #abb2bf;
+}
+
+/* ==========================================
+   CODE INLINE
+========================================== */
+p code {
+  background: rgba(108, 99, 255, 0.2);
+  color: var(--primary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.88em;
+}
+
+/* ==========================================
+   STRONG & EM
+========================================== */
+strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+em {
+  color: var(--accent);
+  font-style: italic;
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+footer a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   SCROLLBAR GLOBALE
+========================================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+/* ==========================================
+   RESPONSIVE DESKTOP
+========================================== */
+@media (min-width: 768px) {
+  header {
+    padding: 1.5rem 2rem 0;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  main {
+    padding: 2rem;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  .card-header code {
+    font-size: 1.1rem;
+  }
+
+  pre {
+    font-size: 0.9rem;
+  }
+}
