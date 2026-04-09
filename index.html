@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Playground</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0f0f1a;
+            --panel: #1a1a2e;
+            --card: #16213e;
+            --border: rgba(255,255,255,0.08);
+            --primary: #7c6dff;
+            --accent: #00d2ff;
+            --pink: #ff6b9d;
+            --green: #43e97b;
+            --yellow: #ffd700;
+            --text: #e0e0f0;
+            --muted: #6b7280;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            padding: 0 30px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-hint {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ── LAYOUT ── */
+        .app {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── SIDEBAR CONTROLS ── */
+        .controls {
+            width: 300px;
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .control-section {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ── ITEM COUNT ── */
+        .item-count-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .count-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .count-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .count-display {
+            flex: 1;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .count-label {
+            font-size: 0.75rem;
+            color: var(--muted);
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        /* ── PROPERTY CONTROL ── */
+        .prop-control {
+            margin-bottom: 18px;
+        }
+
+        .prop-label {
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: var(--accent);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .prop-current {
+            color: var(--pink);
+            font-weight: 700;
+        }
+
+        .btn-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .prop-btn {
+            padding: 7px 12px;
+            border-radius: 7px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: 0.75rem;
+            font-family: monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .prop-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(124, 109, 255, 0.1);
+        }
+
+        .prop-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 0 12px rgba(124,109,255,0.4);
+        }
+
+        /* ── FLEX WRAP TOGGLE ── */
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: var(--accent);
+        }
+
+        .toggle {
+            width: 44px;
+            height: 24px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .toggle.on {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .toggle.on::after {
+            left: 22px;
+        }
+
+        /* ── GAP SLIDER ── */
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--card);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(124,109,255,0.6);
+        }
+
+        .slider-val {
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: var(--pink);
+            min-width: 35px;
+            text-align: right;
+        }
+
+        /* ── RESET BTN ── */
+        .reset-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,107,157,0.3);
+            background: rgba(255,107,157,0.08);
+            color: var(--pink);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255,107,157,0.2);
+        }
+
+        /* ── CANVAS AREA ── */
+        .canvas-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        /* ── CODE BAR ── */
+        .code-bar {
+            background: #0d1117;
+            border-bottom: 1px solid var(--border);
+            padding: 10px 24px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+            min-height: 44px;
+        }
+
+        .code-selector { color: #7ee787; }
+        .code-brace    { color: #e6edf3; }
+        .code-prop     { color: #79c0ff; }
+        .code-colon    { color: #e6edf3; margin: 0 2px; }
+        .code-val      { color: #ff9a6c; font-weight: 700; }
+        .code-semi     { color: #e6edf3; margin-right: 12px; }
+
+        /* ── PLAYGROUND ── */
+        .playground {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Grid background */
+        .playground::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(124,109,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124,109,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* ── FLEX BOX ── */
+        .flex-box {
+            width: 100%;
+            max-width: 800px;
+            min-height: 360px;
+            background: rgba(22, 33, 62, 0.8);
+            border: 2px dashed rgba(124, 109, 255, 0.5);
+            border-radius: 20px;
+            display: flex;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.34,1.2,0.64,1);
+            backdrop-filter: blur(4px);
+            z-index: 1;
+        }
+
+        .flex-box-label {
+            position: absolute;
+            top: -13px;
+            left: 20px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 3px 12px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-weight: 600;
+        }
+
+        /* ── CIRCLES ── */
+        .circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            cursor: default;
+            /* transition sur toutes les propriétés de position/layout */
+            transition:
+                width 0.5s cubic-bezier(0.34,1.2,0.64,1),
+                height 0.5s cubic-bezier(0.34,1.2,0.64,1),
+                margin 0.5s ease,
+                opacity 0.4s ease,
+                transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .circle:hover {
+            transform: scale(1.12);
+            z-index: 10;
+        }
+
+        .circle-inner {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .circle-inner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            top: 0;
+            height: 40%;
+            border-radius: 50% 50% 0 0;
+        }
+
+        /* Colors */
+        .c0 .circle-inner { background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 8px 25px rgba(102,126,234,0.5); }
+        .c1 .circle-inner { background: linear-gradient(135deg, #f093fb, #f5576c); box-shadow: 0 8px 25px rgba(245,87,108,0.5); }
+        .c2 .circle-inner { background: linear-gradient(135deg, #4facfe, #00f2fe); box-shadow: 0 8px 25px rgba(0,242,254,0.5); }
+        .c3 .circle-inner { background: linear-gradient(135deg, #43e97b, #38f9d7); box-shadow: 0 8px 25px rgba(67,233,123,0.5); }
+        .c4 .circle-inner { background: linear-gradient(135deg, #f6d365, #fda085); box-shadow: 0 8px 25px rgba(253,160,133,0.5); }
+        .c5 .circle-inner { background: linear-gradient(135deg, #a18cd1, #fbc2eb); box-shadow: 0 8px 25px rgba(161,140,209,0.5); }
+        .c6 .circle-inner { background: linear-gradient(135deg, #fd7043, #ff8a65); box-shadow: 0 8px 25px rgba(253,112,67,0.5); }
+
+        /* appearing animation */
+        @keyframes popIn {
+            0%   { transform: scale(0) rotate(-180deg); opacity: 0; }
+            70%  { transform: scale(1.15) rotate(5deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .circle.pop-in .circle-inner {
+            animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+        }
+
+        @keyframes popOut {
+            0%   { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .circle.pop-out .circle-inner {
+            animation: popOut 0.3s ease forwards;
+        }
+
+        /* ── AXES INDICATOR ── */
+        .axes {
+            position: absolute;
+            bottom: 16px;
+            right: 20px;
+            display: flex;
+            gap: 16px;
+            z-index: 2;
+        }
+
+        .axis {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .axis-line {
+            width: 30px;
+            height: 2px;
+            position: relative;
+        }
+
+        .axis-line::after {
+            content: '▶';
+            position: absolute;
+            right: -6px;
+            top: -5px;
+            font-size: 8px;
+        }
+
+        .axis-main { background: var(--primary); }
+        .axis-main::after { color: var(--primary); }
+        .axis-cross { background: var(--pink); }
+        .axis-cross::after { color: var(--pink); }
+
+        /* vertical axis */
+        .axis-line.vertical {
+            width: 2px;
+            height: 30px;
+        }
+
+        .axis-line.vertical::after {
+            content: '▼';
+            right: -4px;
+            top: auto;
+            bottom: -10px;
+        }
+
+        /* ── SCROLLBAR ── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(124,109,255,0.3); border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">⚡ Flexbox Playground</div>
+    <div class="header-hint">Modifie les propriétés → vois les éléments bouger en temps réel</div>
+</header>
+
+<div class="app">
+
+    <!-- ═══════════════ CONTROLS ═══════════════ -->
+    <aside class="controls">
+
+        <!-- Nombre d'éléments -->
+        <div class="control-section">
+            <div class="section-title">Éléments</div>
+            <div class="item-count-control">
+                <button class="count-btn" onclick="changeCount(-1)">−</button>
+                <div>
+                    <div class="count-display" id="count-display">3</div>
+                    <div class="count-label">cercles</div>
+                </div>
+                <button class="count-btn" onclick="changeCount(1)">+</button>
+            </div>
+        </div>
+
+        <!-- justify-content -->
+        <div class="control-section">
+            <div class="section-title">justify-content</div>
+            <div class="prop-control">
+                <div class="prop-label">
+                    <span>axe principal</span>
+                    <span class="prop-current" id="jc-val">flex-start</span>
+                </div>
+                <div class="btn-grid" id="jc-btns">
+                    <button class="prop-btn active" onclick="setProp('justifyContent','flex-start','jc-btns','jc-val')">flex-start</button>
+                    <button class="prop-btn" onclick="setProp('justifyContent','flex-end','jc-btns','jc-val')">flex-end</button>
+                    <button class="prop-btn" onclick="setProp('justifyContent','center','jc-btns','jc-val')">center</button>
+                    <button class="prop-btn" onclick="setProp('justifyContent','space-between','jc-btns','jc-val')">space-between</button>
+                    <button class="prop-btn" onclick="setProp('justifyContent','space-around','jc-btns','jc-val')">space-around</button>
+                    <button class="prop-btn" onclick="setProp('justifyContent','space-evenly','jc-btns','jc-val')">space-evenly</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- align-items -->
+        <div class="control-section">
+            <div class="section-title">align-items</div>
+            <div class="prop-control">
+                <div class="prop-label">
+                    <span>axe croisé</span>
+                    <span class="prop-current" id="ai-val">stretch</span>
+                </div>
+                <div class="btn-grid" id="ai-btns">
+                    <button class="prop-btn active" onclick="setProp('alignItems','stretch','ai-btns','ai-val')">stretch</button>
+                    <button class="prop-btn" onclick="setProp('alignItems','flex-start','ai-btns','ai-val')">flex-start</button>
+                    <button class="prop-btn" onclick="setProp('alignItems','flex-end','ai-btns','ai-val')">flex-end</button>
+                    <button class="prop-btn" onclick="setProp('alignItems','center','ai-btns','ai-val')">center</button>
+                    <button class="prop-btn" onclick="setProp('alignItems','baseline','ai-btns','ai-val')">baseline</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- flex-direction -->
+        <div class="control-section">
+            <div class="section-title">flex-direction</div>
+            <div class="prop-control">
+                <div class="prop-label">
+                    <span>direction</span>
+                    <span class="prop-current" id="fd-val">row</span>
+                </div>
+                <div class="btn-grid" id="fd-btns">
+                    <button class="prop-btn active" onclick="setProp('flexDirection','row','fd-btns','fd-val')">row</button>
+                    <button class="prop-btn" onclick="setProp('flexDirection','row-reverse','fd-btns','fd-val')">row-reverse</button>
+                    <button class="prop-btn" onclick="setProp('flexDirection','column','fd-btns','fd-val')">column</button>
+                    <button class="prop-btn" onclick="setProp('flexDirection','column-reverse','fd-btns','fd-val')">column-reverse</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- flex-wrap -->
+        <div class="control-section">
+            <div class="section-title">flex-wrap</div>
+            <div class="toggle-row">
+                <span class="toggle-label" id="wrap-label">nowrap</span>
+                <div class="toggle" id="wrap-toggle" onclick="toggleWrap()"></div>
+            </div>
+        </div>
+
+        <!-- gap -->
+        <div class="control-section">
+            <div class="section-title">gap</div>
+            <div class="prop-label" style="font-size:0.8rem; font-family:monospace; color:var(--accent); margin-bottom:8px;">
+                espace entre les éléments
+            </div>
+            <div class="slider-row">
+                <input type="range" class="slider" id="gap-slider"
+                       min="0" max="60" value="10"
+                       oninput="setGap(this.value)">
+                <span class="slider-val" id="gap-val">10px</span>
+            </div>
+        </div>
+
+        <!-- Reset -->
+        <div class="control-section">
+            <button class="reset-btn" onclick="resetAll()">↺ Tout réinitialiser</button>
+        </div>
+
+    </aside>
+
+    <!-- ═══════════════ CANVAS ═══════════════ -->
+    <div class="canvas-area">
+
+        <!-- Code live -->
+        <div class="code-bar" id="code-bar"></div>
+
+        <!-- Playground -->
+        <div class="playground">
+            <div class="flex-box" id="flex-box">
+                <div class="flex-box-label">display: flex</div>
+                <!-- circles injectés par JS -->
+            </div>
+
+            <!-- Indicateurs d'axes -->
+            <div class="axes" id="axes-indicator">
+                <div class="axis">
+                    <div class="axis-line axis-main" id="axis-main-line"></div>
+                    <span id="axis-main-label" style="color: var(--primary)">axe principal</span>
+                </div>
+                <div class="axis">
+                    <div class="axis-line axis-cross" id="axis-cross-line"></div>
+                    <span id="axis-cross-label" style="color: var(--pink)">axe croisé</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+const state = {
+    count:          3,
+    justifyContent: 'flex-start',
+    alignItems:     'stretch',
+    flexDirection:  'row',
+    flexWrap:       'nowrap',
+    gap:            10,
+};
+
+const labels = ['A','B','C','D','E','F','G'];
+
+// ─────────────────────────────────────────────
+// RENDER CIRCLES
+// ─────────────────────────────────────────────
+function renderCircles() {
+    const box    = document.getElementById('flex-box');
+    const current = box.querySelectorAll('.circle');
+    const currentCount = current.length;
+    const targetCount  = state.count;
+
+    if (targetCount > currentCount) {
+        // Add circles
+        for (let i = currentCount; i < targetCount; i++) {
+            const div = document.createElement('div');
+            div.className = `circle c${i % 7} pop-in`;
+            div.dataset.index = i;
+            div.innerHTML = `<div class="circle-inner">${labels[i]}</div>`;
+            box.appendChild(div);
+            // remove animation class after
+            setTimeout(() => div.classList.remove('pop-in'), 600);
+        }
+    } else if (targetCount < currentCount) {
+        // Remove circles
+        for (let i = currentCount - 1; i >= targetCount; i--) {
+            const el = box.querySelector(`.circle[data-index="${i}"]`);
+            if (el) {
+                el.classList.add('pop-out');
+                setTimeout(() => el.remove(), 300);
+            }
+        }
+    }
+}
+
+// ─────────────────────────────────────────────
+// APPLY FLEX
+// ─────────────────────────────────────────────
+function applyFlex() {
+    const box = document.getElementById('flex-box');
+    box.style.justifyContent = state.justifyContent;
+    box.style.alignItems     = state.alignItems;
+    box.style.flexDirection  = state.flexDirection;
+    box.style.flexWrap       = state.flexWrap;
+    box.style.gap            = state.gap + 'px';
+
+    // If column direction, give more height
+    const isColumn = state.flexDirection.includes('column');
+    box.style.minHeight  = isColumn ? '500px' : '360px';
+    box.style.maxWidth   = isColumn ? '400px' : '800px';
+
+    updateAxesIndicator(isColumn);
+    updateCodeBar();
+}
+
+// ─────────────────────────────────────────────
+// AXES INDICATOR
+// ─────────────────────────────────────────────
+function updateAxesIndicator(isColumn) {
+    const mainLine  = document.getElementById('axis-main-line');
+    const crossLine = document.getElementById('axis-cross-line');
+
+    if (isColumn) {
+        mainLine.classList.add('vertical');
+        crossLine.classList.remove('vertical');
+    } else {
+        mainLine.classList.remove('vertical');
+        crossLine.classList.add('vertical');
+    }
+}
+
+// ─────────────────────────────────────────────
+// CODE BAR
+// ─────────────────────────────────────────────
+function updateCodeBar() {
+    const bar = document.getElementById('code-bar');
+    const s = state;
+
+    const props = [
+        ['display', 'flex'],
+        ['flex-direction', s.flexDirection],
+        ['justify-content', s.justifyContent],
+        ['align-items', s.alignItems],
+        ['flex-wrap', s.flexWrap],
+        ['gap', s.gap + 'px'],
+    ];
+
+    // Only show non-default values (but always show all for learning)
+    let html = `<span class="code-selector">.container</span>
+                <span class="code-brace">{</span>`;
+
+    props.forEach(([prop, val]) => {
+        html += `<span class="code-prop">${prop}</span>
+                 <span class="code-colon">:</span>
+                 <span class="code-val">${val}</span>
+                 <span class="code-semi">;</span>`;
+    });
+
+    html += `<span class="code-brace">}</span>`;
+    bar.innerHTML = html;
+}
+
+// ─────────────────────────────────────────────
+// CONTROLS
+// ─────────────────────────────────────────────
+function changeCount(delta) {
+    state.count = Math.min(7, Math.max(1, state.count + delta));
+    document.getElementById('count-display').textContent = state.count;
+    renderCircles();
+}
+
+function setProp(cssProp, value, btnGroupId, labelId) {
+    state[cssProp] = value;
+
+    // Update buttons
+    document.querySelectorAll(`#${btnGroupId} .prop-btn`).forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === value);
+    });
+
+    // Update label
+    document.getElementById(labelId).textContent = value;
+
+    applyFlex();
+}
+
+function toggleWrap() {
+    const toggle = document.getElementById('wrap-toggle');
+    const label  = document.getElementById('wrap-label');
+    const isOn   = toggle.classList.toggle('on');
+    state.flexWrap = isOn ? 'wrap' : 'nowrap';
+    label.textContent = state.flexWrap;
+    applyFlex();
+}
+
+function setGap(val) {
+    state.gap = parseInt(val);
+    document.getElementById('gap-val').textContent = val + 'px';
+    applyFlex();
+}
+
+function resetAll() {
+    state.justifyContent = 'flex-start';
+    state.alignItems     = 'stretch';
+    state.flexDirection  = 'row';
+    state.flexWrap       = 'nowrap';
+    state.gap            = 10;
+    state.count          = 3;
+
+    // Reset UI
+    document.getElementById('count-display').textContent = 3;
+    document.getElementById('gap-slider').value = 10;
+    document.getElementById('gap-val').textContent = '10px';
+    document.getElementById('wrap-toggle').classList.remove('on');
+    document.getElementById('wrap-label').textContent = 'nowrap';
+
+    // Reset buttons
+    ['jc-btns','ai-btns','fd-btns'].forEach(id => {
+        document.querySelectorAll(`#${id} .prop-btn`).forEach((btn, i) => {
+            btn.classList.toggle('active', i === 0);
+        });
+    });
+
+    document.getElementById('jc-val').textContent = 'flex-start';
+    document.getElementById('ai-val').textContent = 'stretch';
+    document.getElementById('fd-val').textContent = 'row';
+
+    // Rebuild circles
+    const box = document.getElementById('flex-box');
+    box.querySelectorAll('.circle').forEach(c => c.remove());
+    renderCircles();
+    applyFlex();
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+renderCircles();
+applyFlex();
+</script>
+</body>
+</html>
