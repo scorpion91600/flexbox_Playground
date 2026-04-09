@@ -1,7 +1,7 @@
 # 🚀 Dev Academy - Ressources Front-End
 
 Une collection complète d'outils et de ressources pour maîtriser le développement front-end moderne. Que vous soyez débutant ou développeur expérimenté, ces outils interactifs et cheat sheets vous aideront à apprendre et à perfectionner vos compétences en HTML, CSS et mise en page.
-Le lien https://scorpion91600.github.io/Latoile-Cheat/index.html
+
 
  **[Le Lien](https://scorpion91600.github.io/Latoile-Cheat/index.html)**
 
